@@ -1,31 +1,34 @@
 cat1 = "/home/rsqsim-00/pub/longCats/UCERF3base35kyrs/eqs.UCERF3base.out"
 cat2 = "/home/rsqsim-00/pub/longCats/UCERF3base35kyr-80kyr/eqs.UCERF3base35kyr-80kyr.out"
-out1 = "UCERF3base_75yrs.RData"
-out2 = "UCERF3base_75yrs.eList"
-out3 = "UCERF3base_75yrs.dList"
-out4 = "UCERF3base_75yrs.tList"
-out5 = "UCERF3base_75yrs.pList"
+outName = "UCERF3base_80yrs"
+
+
+out1 = paste(outName, ".RData", sep="")
+out2 = paste(outName, ".eList", sep="")
+out3 = paste(outName, ".dList", sep="")
+out4 = paste(outName, ".tList", sep="")
+out5 = paste(outName, ".pList", sep="")
 
 
 eqFiles = c(cat1,cat2)
 print("start")
 eqs = readAndCombineEqfiles(eqFiles)
 
+
 print("start save")
 #save(eqs, file = out1)
-print(str(eqs))
+#print(str(eqs))
 
 
 print("start save list e")
-#save(list = eqs$eList, file = out2)
-write(eqs$eList, file = out2)
+writeBin(eqs$eList, out2, endian = "big")
 
 print("start save list d")
-write(eqs$dList, file = out3)
+writeBin(eqs$dList, out3, endian = "big")
 
 print("start save list t")
-write(eqs$tList, file = out4)
+writeBin(eqs$tList, out4, endian = "big")
 
 print("start save list p")
-write(eqs$pList, file = out5)
+writeBin(eqs$pList, out5, endian = "big")
 
