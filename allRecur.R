@@ -29,12 +29,24 @@ for ( myFile in myFileList){
     
    inRange = which(eqs$M >= eMin & eqs$M <= eMax & eqs$t0yr > tMin & eqs$t0yr < tMax )
 
-    
-    ssaf = which(eqs$fault$faultName %in% c("SanAndreas(BigBend)","SanAndreas(Coachella)rev", "SanAndreas(MojaveN)",
-                                        "SanAndreas(MojaveS)", "SanAndreas(SanBernardinoN)","SanAndreas(SanBernardinoS)",
-                                        "SanAndreas(SanGorgonioPass-GarnetHIll)"))
+   ssaf = which(eqs$fault$faultName %in% c("SanAndreas(BigBend)","SanAndreas(Coachella)rev", "SanAndreas(MojaveN)", 
+					"SanAndreas(MojaveS)", "SanAndreas(SanBernardinoN)","SanAndreas(SanBernardinoS)", 
+					"SanAndreas(SanGorgonioPass-GarnetHIll)"))
 
-    #sjf = which()
+nsaf =  which(eqs$fault$faultName %in% c("SanAndreas(Carrizo)rev","SanAndreas(Cholame)rev","SanAndreas(CreepingSection)2011CFM",
+					 "SanAndreas(MojaveN)","SanAndreas(NorthBranchMillCreek)","SanAndreas(NorthCoast)2011CFM",
+					 "SanAndreas(Offshore)2011CFM","SanAndreas(Parkfield)","SanAndreas(Peninsula)2011CFM",
+					 "SanAndreas(SantaCruzMts)2011CFM"))
+
+saf =  which(eqs$fault$faultName %in% c("SanAndreas(BigBend)","SanAndreas(Carrizo)rev","SanAndreas(Cholame)rev","SanAndreas(Coachella)rev",
+                                        "SanAndreas(CreepingSection)2011CFM","SanAndreas(MojaveN)","SanAndreas(MojaveS)",
+                                        "SanAndreas(NorthBranchMillCreek)","SanAndreas(NorthCoast)2011CFM","SanAndreas(Offshore)2011CFM",
+                                        "SanAndreas(Parkfield)","SanAndreas(Peninsula)2011CFM","SanAndreas(SanBernardinoN)",
+					"SanAndreas(SanBernardinoS)","SanAndreas(SanGorgonioPass-GarnetHIll)","SanAndreas(SantaCruzMts)2011CFM"))
+
+saj = which(eqs$fault$faultName %in% c("SanJacinto(Anza)rev","SanJacinto(Borrego)","SanJacinto(Clark)rev","SanJacinto(CoyoteCreek)",
+				       "SanJacinto(LytleCreekconnector)","SanJacinto(SanBernardino)","SanJacinto(SanJacintoValley)rev",
+				       "SanJacinto(StepoversCombined)","SanJacinto(SuperstitionMtn)"))
 
     faultNames = ssaf                                               # To more easily change the list of fault patches used, change the value of faultNames
     euse = unique(eqs$eList[which(eqs$pList %in% faultNames)])	# List of the event ID's for those events on the SSAF
