@@ -8,7 +8,7 @@
 
 ### combine.R
 * Combine list files from two runs for the prob team 
-* Not working
+
 
 
 ### listAll.R

@@ -21,14 +21,14 @@ print("start save")
 
 
 print("start save list e")
-writeBin(eqs$eList, out2, endian = "big")
+writeBin(eqs$eList, out2, size=4, endian = "big")
 
 print("start save list d")
-writeBin(eqs$dList, out3, endian = "big")
+writeBin(eqs$dList, out3, size=8, endian = "big")
 
 print("start save list t")
-writeBin(eqs$tList, out4, endian = "big")
+writeBin(eqs$tList, out4, size=8, endian = "big")
 
 print("start save list p")
-writeBin(eqs$pList, out5, endian = "big")
+writeBin(eqs$pList, out5, size=4, endian = "big")
 
