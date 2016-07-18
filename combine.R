@@ -15,15 +15,17 @@ print("start save")
 #save(eqs, file = out1)
 print(str(eqs))
 
+
 print("start save list e")
-save(list = eqs$eList, file = out2)
+#save(list = eqs$eList, file = out2)
+write(eqs$eList, file = out2)
 
 print("start save list d")
-save(list = eqs$dList, file = out3)
+write(eqs$dList, file = out3)
 
 print("start save list t")
-save(list = eqs$tList, file = out4)
+write(eqs$tList, file = out4)
 
 print("start save list p")
-save(list = eqs$pList, file = out5)
+write(eqs$pList, file = out5)
 
