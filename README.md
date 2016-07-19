@@ -18,3 +18,7 @@
 
 ### myMain.R
 * A lot of plots 
+
+
+### restart_rsqsim.py
+* Usage: `./restart_rsqsim.py <RSQSim source dir> <old directory> <old .in file> <restart name> <new maxT>`
