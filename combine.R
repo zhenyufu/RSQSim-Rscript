@@ -1,7 +1,8 @@
 
 cat1 = "/home/rsqsim-00/pub/longCats/UCERF3base35kyrs/eqs.UCERF3base.out"
 cat2 = "/home/rsqsim-00/pub/longCats/UCERF3base35kyr-80kyr/eqs.UCERF3base35kyr-80kyr.out"
-outName = "UCERF3base_80yrs"
+cat3 = "/home/rsqsim-00/pub/longCats/UCERF3base80kyr-125kyr/eqs.UCERF3base80kyr-125kyr.out"
+outName = "/home/rsqsim-00/pub/longCats/UCERF3base_combine125kyrs"
 
 
 out1 = paste(outName, ".RData", sep="")
@@ -10,7 +11,7 @@ out3 = paste(outName, ".pList", sep="") # int
 out4 = paste(outName, ".dList", sep="") # double
 out5 = paste(outName, ".tList", sep="") # double
 
-eqFiles = c(cat1,cat2)
+eqFiles = c(cat1,cat2, cat3)
 print("start")
 eqs = readAndCombineEqfiles(eqFiles)
 
@@ -18,7 +19,7 @@ eqs = readAndCombineEqfiles(eqFiles)
 ### 1 .RData
 print("start save")
 print(str(eqs))
-#save(eqs, file = out1)
+save(eqs, file = out1)
 
 
 ### 2 e
