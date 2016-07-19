@@ -76,6 +76,9 @@ params['outFnameInfix'] = restart_name
 params['initTauFname'] = "%s.initTau" % (restart_name)
 params['initSigmaFname'] = "%s.initSigma" % (restart_name)
 params['initThetaFname'] = "%s.initTheta" % (restart_name)
+#
+params['pinnedFname'] = "%s.pin" % (restart_name)
+
 
 #Copy in neighborFname, faultFname, KZeroFname
 print "Copying in files."
