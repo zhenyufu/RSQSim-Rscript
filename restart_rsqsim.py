@@ -65,7 +65,7 @@ if rc!=0:
 
 #Get Tstart from file
 with open("Tstart.out", "r") as fp_in:
-	tstart = float(fp_in.readline())
+	tstart = fp_in.readline().rstrip('\n')
 	fp_in.close()
 
 #Change maxT, outFnameInfix,  initTauFname, initSigmaFname, initThetaFname, pinnedFname, Tstart
