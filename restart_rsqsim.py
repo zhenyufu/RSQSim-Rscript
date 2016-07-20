@@ -78,6 +78,11 @@ params['initSigmaFname'] = "%s.initSigma" % (restart_name)
 params['initThetaFname'] = "%s.initTheta" % (restart_name)
 #
 params['pinnedFname'] = "%s.pin" % (restart_name)
+params['writeSigma'] = 2
+params['writeTau'] = 2
+params['writeTheta'] = 2
+
+
 
 
 #Copy in neighborFname, faultFname, KZeroFname
