@@ -1,7 +1,7 @@
 #myPath = "/home/rsqsim-00/pub/"
 #myFileList = list.files(myPath, pattern="eqs.*.out$", full.names=TRUE, recursive = TRUE)
 #print(myFileList)
-source("/home/scec-01/davidfu/listAll.R")
+source("listAll.R")
 
 boolPlot3d = 0
 eMin = 7
