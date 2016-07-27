@@ -4,14 +4,14 @@ source("/home/scec-01/davidfu/scatterplot3d/R/scatterplot3d.R")
 
 
 #myFile = "/home/rsqsim-01/mbent/UCERF3test35kyrs/eqs.UCERF3base.out"
-myFile = "/home/rsqsim-00/pub/UCERF3base/eqs.UCERF3base.out"
+#myFile = "/home/rsqsim-00/pub/UCERF3base/eqs.UCERF3base.out"
 
 myFiles = c("/home/rsqsim-00/pub/30kyrs/UCERF3rate/eqs.UCERF3rate.out",
 "/home/rsqsim-00/pub/30kyrs/UCERF3state/eqs.UCERF3state.out")
 myCol = rainbow(length(myFiles))
 
 print("Using File:")
-print (myFile)
+#print (myFile)
 
 
 # Set plot bools
@@ -26,12 +26,12 @@ yMax = 9
 boolPlotHist = 0
 hMin = 7.8
 
-boolPlot3d = 0
-dMin = 7.8
+boolPlot3d = 1
+dMin = 7
 dMax = 9
 dAngle = 40
 
-boolPlotAll = 1
+boolPlotAll = 0
 aMin = 7.6
 
 
@@ -53,6 +53,7 @@ myFilter = function(eqs,use){
         eqs$z <- eqs$z[use]
         eqs$area <- eqs$area[use]
         eqs$dt <- eqs$dt[use]
+        eqs$dbar <- eqs$dbar[use]
         Ntot <- length(use)
     }
     eqs$M[!is.finite(eqs$M)] <- NA
@@ -63,7 +64,8 @@ myFilter = function(eqs,use){
 
 ############################################# START
 
-eqs = readEqs(myFile)
+#eqs = readEqs(myFile)
+load("/home/rsqsim-00/pub/longCats/combine340/UCERF3base_combine340kyrs.RData")
 
 print( length(eqs$M) )
 print( length(which(eqs$M > 7)) )
@@ -98,11 +100,18 @@ if(boolPlotHist){
 
 
 if(boolPlot3d){
-    use = which(eqs$M > dMin & eqs$M < dMax)
-    temp = myFilter(eqs,use) 
+    use = which(eqs$M > dMin & eqs$M < dMax & eqs$t0yr > 5000)
+    e = myFilter(eqs,use) 
     x11() 
-    scatterplot3d(temp$t0yr, temp$M, temp$z, angle = dAngle, main=dMin, highlight.3d=TRUE, type="h")
-    
+x = e$M
+x_norm = (x - min(x)) / (max(x) - min(x))
+col_fun <- colorRamp(c("blue", "red"))
+rgb_cols <- col_fun(x_norm)
+cols <- rgb(rgb_cols, maxColorValue = 256)
+
+
+    scatterplot3d(e$area, e$t0yr, e$z, color = cols, pch = 16, angle = dAngle, main=dMin,  type="p")
+    #highlight.3d=TRUE,
     #plot3d(temp$t0yr, temp$M, temp$z, col="red", size=3)
 }
 
