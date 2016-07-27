@@ -65,7 +65,9 @@ myFilter = function(eqs,use){
 ############################################# START
 
 #eqs = readEqs(myFile)
-load("/home/rsqsim-00/pub/longCats/combine340/UCERF3base_combine340kyrs.RData")
+if(! exists("eqs")){
+    load("/home/rsqsim-00/pub/longCats/combine340/UCERF3base_combine340kyrs.RData")
+}
 
 print( length(eqs$M) )
 print( length(which(eqs$M > 7)) )
@@ -110,7 +112,7 @@ rgb_cols <- col_fun(x_norm)
 cols <- rgb(rgb_cols, maxColorValue = 256)
 
 
-    scatterplot3d(e$area, e$t0yr, e$z, color = cols, pch = 16, angle = dAngle, main=dMin,  type="p")
+    scatterplot3d(e$t0yr, e$area, e$M, color = cols, pch = 16, angle = dAngle, main=dMin,  type="p")
     #highlight.3d=TRUE,
     #plot3d(temp$t0yr, temp$M, temp$z, col="red", size=3)
 }
