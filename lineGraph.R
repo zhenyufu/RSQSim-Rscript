@@ -1,34 +1,36 @@
+# source for the .Rprofile
 source("/home/scec-01/davidfu/.Rprofile")
 
+# either read the earthquakes in or load the .RData file
 #eqs = readEqs("/home/rsqsim-01/mbent/baseRuns/UCERF3base35kyrs/eqs.UCERF3base.out")
-#eqs = readEqs("/home/rsqsim-01/mbent/baseRuns/UCERF3base80kyr-125kyr/eqs.UCERF3base80kyr-125kyr.out")
-#eqs = readEqs("/home/scec-01/davidfu/UCERF3sigmahigh/eqs.UCERF3sigmahigh.out")
-#eqs = readEqs("/home/rsqsim-00/sortega4/eqs.UCERF3rate.out")
-#eqs = readEqs("/home/rsqsim-02/hmlopez/eqs.UCERF3state.out")
 load("/home/rsqsim-01/mbent/baseRuns/UCERF3base_125kyrs.RData")
 
+# change the max year depending on the length of the catalog
 maxYr <- 125000
 increment <- 500
 currYr <- 0
 count <- 0
 div <- (maxYr/increment)
 
-yrs <- vector("list", div)
-freq <- vector("list", div)
 
+yrs <- vector("list", div)			# list of years for plotting
+freq <- vector("list", div)			# list of frequencies of events per time period
+
+# loop through entire list of events in chunks of time
 while(currYr < maxYr){
+
+	# find the number of large events during current time period
 	lst = which(eqs$M > 7 & eqs$t0yr > currYr & eqs$t0yr < (currYr+increment))
 	len = length(lst)
 
 	count <- count + 1
 	currYr <- currYr + increment
 
+	# record number of events and time period
 	freq[count] <- len
 	yrs[count] <- currYr
 		
 }
 
-print(freq)
-print(yrs)
-
+# plot line graph
 plot(yrs, freq, type="b")
