@@ -1,4 +1,3 @@
-# Set parameters 
 source("/home/scec-01/davidfu/scatterplot3d/R/scatterplot3d.R")
 #library(rgl)
 
@@ -66,7 +65,7 @@ myFilter = function(eqs,use){
 
 #eqs = readEqs(myFile)
 if(! exists("eqs")){
-    load("/home/rsqsim-00/pub/longCats/combine340/UCERF3base_combine340kyrs.RData")
+    load("/home/rsqsim-00/pub/longCats/combine_sigmahigh_170kyrs/UCERF3sigmahigh_combine170kyrs.RData")
 }
 
 print( length(eqs$M) )
@@ -105,15 +104,58 @@ if(boolPlot3d){
     use = which(eqs$M > dMin & eqs$M < dMax & eqs$t0yr > 5000)
     e = myFilter(eqs,use) 
     x11() 
-x = e$M
+x = -e$z
 x_norm = (x - min(x)) / (max(x) - min(x))
-col_fun <- colorRamp(c("blue", "red"))
+col_fun <- colorRamp(c("lightskyblue", "red"))
 rgb_cols <- col_fun(x_norm)
 cols <- rgb(rgb_cols, maxColorValue = 256)
 
 
-    scatterplot3d(e$t0yr, e$area, e$M, color = cols, pch = 16, angle = dAngle, main=dMin,  type="p")
-    #highlight.3d=TRUE,
+#####
+
+pdf("img.pdf",width=7, height=5)
+
+layout(matrix(1:2,nrow=1),widths=c(0.2,0.8))
+colfunc <- colorRampPalette(c("red", "lightskyblue"))
+
+
+xl <- 1
+yb <- 1
+xr <- 1.5
+yt <- 2
+
+plot(NA,type="n",ann=FALSE,xlim=c(1,2),ylim=c(1,2),xaxt="n",yaxt="n",bty="n", main = "Depth")
+rect(
+     xl,
+     head(seq(yb,yt,(yt-yb)/10),-1),
+     xr,
+     tail(seq(yb,yt,(yt-yb)/10),-1),
+     col=colfunc(10)
+    )
+xStart = 250 #round(min(x))  
+xEnd = round(max(x))
+xIntv = 250 #round((xEnd - xStart)/9)
+print(xStart)
+print(xEnd)
+print(xIntv)
+
+xVec = seq(from = xStart, to = 99999, by = xIntv)
+xVec = xVec[1:10]
+
+mtext(rev(-xVec),side=2,at=tail(seq(yb,yt,(yt-yb)/10),-1)-0.05,las=2,cex=0.8)
+
+
+###
+    s3d = scatterplot3d(e$t0yr, e$area, e$M, color = cols, pch = 16, angle = dAngle, main = "Sigmahigh 170,000 years Magnitude > 7 Earthquakes", xlab="Time (year)", ylab = "Rupture area (m2)", zlab = "Magnitude", type="p")
+#legend("topleft", bty="n", title="Depth(m)", c( toString(round(-min(x))), toString(round(-max(x))) ), fill=c("lightskyblue", "red"))
+
+#addColorBar(pal=c("lightskyblue", "red"), cmin = round(-max(x)), cmax = round(-min(x)) )
+###
+
+dev.off()
+#####
+
+#highlight.3d=TRUE,
     #plot3d(temp$t0yr, temp$M, temp$z, col="red", size=3)
 }
 
